@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Multimedia on Teoría Económica</title>
+    <link>/tags/multimedia/</link>
+    <description>Recent content in Multimedia on Teoría Económica</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/multimedia/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Recursos Adicionales</title>
+      <link>/post/recursos-adicionales/</link>
+      <pubDate>Thu, 23 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/recursos-adicionales/</guid>
+      <description>Unidad 1 PIB. Metodología
+SCN
+Antecedentes clásicos de la teoría macroeconómica. Of the Balance of Trade by David Hume
+Inflación El caso de Venezuela
+Crecimiento económico  en región de América Latina, el caso de Chile.
+Contraste situación actual vs. periodo 2012.
+Mexican Banks Conducción de politica económica e Impactos sobre agregados Macroeconómicos.
+Regulación en Bancos e impactos en agregados Macro 
+Regulación en Bancos impactos no considerados
+Inversión Extranjera</description>
+    </item>
+    
+  </channel>
+</rss>

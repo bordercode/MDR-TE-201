@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Teoría Económica</title>
+    <link>/categories/r/</link>
+    <description>Recent content in R on Teoría Económica</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ejercicios</title>
+      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <description>library(tidyverse)# Read PIB datapibcrr&amp;lt;-read.csv(&amp;quot;pib_crr.csv&amp;quot;)pib.ts&amp;lt;- ts(data=pibcrr$pib, frequency = 4,start=c(1993,1), end=c(2018,2))## PIB Nominalplot(pib.ts, col=&amp;quot;blue&amp;quot;, lwd=2, ylab=&amp;quot;PIB Nominal&amp;quot;)##Ejercicio 1. Evolución nominal 2010-2018.pib.ts1&amp;lt;-window(pib.ts,start= c(2010,1), end=c(2018,1))plot(pib.ts1, col=&amp;quot;blue&amp;quot;, lwd=2, ylab=&amp;quot;PIB Nominal&amp;quot;)# Ejercicio 2## Estimar crecimiento porcentual acumulado (normalizado base 1993:1).growth&amp;lt;-mutate(pibcrr,log=log(pib), g=log-14.22243)growth.ts&amp;lt;- ts(data=growth$g, frequency = 4,start=c(1993,1), end=c(2018,2))## Crecimiento acumulado en todo el periodo (normalizado base 1993:1)plot(growth.ts, col=&amp;quot;darkgreen&amp;quot;, lwd=2, ylab=&amp;quot;PIB&amp;quot;)## Crecimiento subperiodo 2000-2018)growth.</description>
+    </item>
+    
+    <item>
+      <title>Productividad y Crecimiento del ingreso</title>
+      <link>/post/unidad-3/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/post/unidad-3/</guid>
+      <description>Objetivo de la sesión: Analizar los principales determinantes de la Oferta Agregada.
+Cuando nos referimos a crecimiento en la economía es conveniente considerar las variaciones en el largo plazo del PIB, en especial del PIB per cápita.
+En términos teóricos la calidad de vida está asociada con el crecimento del PIB per cápita. Un incremento en el PIB per cápita puede presentarse si el ritmo de crecimiento del PIB es mayor al crecimiento de la poblacion.</description>
+    </item>
+    
+    <item>
+      <title>Unidad 2</title>
+      <link>/post/2015-11-28-r-unidad-2/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/post/2015-11-28-r-unidad-2/</guid>
+      <description>Objetivos de aprendizaje de la sesión 3.Análizar principales determinantes de la demanda agregada y la determinación del producto y gasto de equilibrio.
+Conocer los instrumentos de la politica macroeconómica y su incidencia en las fluctuaciones de la demanda. Así como estudiar el mercado de dinero y su interacción con las principales variables macroeconómicas.
+Consumo, Inversión, Ahorro, Gasto Gubernamental.Para comprender la influencia que los determinates de la Demanda Agregada tienen sobre los agregados macroeconómicos, es importante retomar los modelos que se han desarrollado por pioneros en el estudio de Macroeconomía.</description>
+    </item>
+    
+  </channel>
+</rss>

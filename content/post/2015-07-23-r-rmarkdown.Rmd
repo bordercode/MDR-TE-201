@@ -1,0 +1,285 @@
+---
+title: "Ejercicios"
+author: "José Luis Manzanares Rivera"
+date: 2015-07-23T21:13:14-05:00
+categories: ["R"]
+tags: ["Practice", "Homework", "PIB"]
+menu:
+  main:
+    name: Ejercicios
+    weight: 10
+---
+
+```{r set-global-options, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(eval = TRUE, 
+                      echo = TRUE, 
+                      cache = FALSE,
+                      include = TRUE,
+                      collapse = FALSE,
+                      dependson = NULL,
+                      engine = "R", # Chunks will always have R code, unless noted
+                      error = FALSE)                     
+
+```
+
+
+```{r silent-packages, echo = FALSE, eval = TRUE, message=FALSE, include = FALSE}
+library(tidyverse)
+```
+
+
+                      
+```{r  PIB }
+
+library(tidyverse)
+
+# Read PIB  data
+
+
+pibcrr<-read.csv("pib_crr.csv")
+
+pib.ts<- ts(data=pibcrr$pib, frequency = 4,
+start=c(1993,1), end=c(2018,2))
+
+## PIB Nominal
+plot(pib.ts, col="blue", lwd=2, ylab="PIB Nominal")
+
+##Ejercicio 1. Evolución nominal 2010-2018.
+
+pib.ts1<-window(pib.ts,start= c(2010,1), end=c(2018,1))
+
+plot(pib.ts1, col="blue", lwd=2, ylab="PIB Nominal")
+
+```
+
+```{r}
+# Ejercicio 2
+
+## Estimar crecimiento porcentual acumulado (normalizado base 1993:1).
+growth<-mutate(pibcrr,log=log(pib), g=log-14.22243)
+growth.ts<- ts(data=growth$g, frequency = 4,start=c(1993,1), end=c(2018,2))
+
+## Crecimiento acumulado en todo el periodo (normalizado base 1993:1)
+plot(growth.ts, col="darkgreen", lwd=2, ylab="PIB")
+
+## Crecimiento subperiodo 2000-2018)
+
+growth.ts1<-window(growth.ts,start= c(2000,1), end=c(2018,1))
+plot(growth.ts1, col="darkgreen", lwd=2, ylab="PIB")
+```
+
+
+```{r}
+## Tasa de crecimiento trimestral
+# Comportamiento cíclico del  PIB.
+Tasa<-diff(log(pib.ts))
+plot(Tasa, col="red", lwd=2, ylab="Tasa")+abline(h=0)
+```
+
+
+```{r}
+
+## Tasa de crecimiento al mismo trimestre año previo. 
+
+Tasa_anual<-diff(log(pib.ts), lag=4)
+plot(Tasa_anual, col="red", lwd=2, ylab="Tasa")+abline(h=0)
+
+```
+
+
+```{r}
+## Un sub perido para detectar los ciclos. 
+plot(window(Tasa_anual, start=(2008), end=(2015)), col="red", lwd=2, ylab="Tasa")+abline(h=0)
+
+#Todas las gráficas combinadas 
+serie<-cbind(pib.ts, growth.ts, Tasa,Tasa_anual)
+plot(serie)
+
+```
+
+
+```{r}
+# Ejercicio Inflación
+
+# 1 Inflación a partir de la evolución mensual del inpc. 
+
+
+
+
+### NOta: Para el ejercicio de inflación
+## Código para leer el INPC  mensual use el código siguiente. 
+
+inf<-read.csv("i.csv")%>%
+select(-X)
+
+# Únicamente  incluya la ruta de su archivo i.csv en el comando anterior.
+######################################################
+
+
+i.ts<- ts(data=inf$VALOR, frequency = 12,
+start=c(2003,1), end=c(2018,9))
+
+i.dif<-diff(log(i.ts), lag=12)
+
+plot(i.dif,col="red", ylab="Inflación (%)")+ abline(h=.03, lwd=2,lty=2)
+```
+
+```{r}
+# 2 Inflación promedio 2015 2017.
+
+promedio15_17<-as.data.frame(window(i.dif,start= c(2015,1), end=c(2017,12)))%>%
+summarize(pi=mean(x))
+```
+
+```{r}
+
+### Solución PIB real en el periodo 2003q1 a 2018q1 con base al año 2006Q1. 
+
+##Load data sets PIB e INPC.
+
+pib<-read.csv("pib_crr.csv")%>%
+  filter(year>=2003)%>%
+  mutate(year=as.factor(year))
+
+
+Iqr<-read.csv("inflacion_qrt_03-18.csv")%>%
+  mutate(year=as.factor(year))%>%
+filter(X!=63)%>%select(-year)
+  
+
+## Join para tener ambas series en un data set
+pib_inf<-cbind(pib,Iqr)%>%
+  select(-c(q,X))%>%
+  rename(inpc=I)
+
+## Estimar PIB con base  2006 Q1
+
+base=60.69083  # inpc 2006Q1#
+
+real<-mutate(pib_inf,real=pib*base/inpc)%>%
+  select(real, pib)
+
+## Series de tiempo
+real.ts<-ts(real,frequency = 4,start=c(2003,1), end=c(2018,2))
+
+plot(real.ts,plot.type="single",main="PIB Real y Nominal 2003-2018", ylab="Millones de pesos. Real año base 2006Q1", col=c("blue", "red"), lty=1:2)+ 
+abline(v="2006", lwd=2,lty=2)
+
+legend(2007, 22732004, legend=c("Real ","Nominal"), col=c("blue", "red"), lty=1:2)
+
+
+
+# Unidad 3 
+
+
+#Ejercicio 1
+
+library(scales)
+
+## a) Evolución PIB percápita  Mëxico, Brazil, Argentina, Chile.  1960 -2017.
+
+ppercapita<-read.csv("pibp2010MX.csv")%>%
+rename(Fecha=year)
+
+p<-gather(ppercapita,país,PIB,México,Argentina,Chile,Brazil, China)
+
+ggplot(p, aes(x=Fecha,y=PIB,colour=país))+
+geom_line()+
+theme_bw()+
+ylab("PIB percápita US$ 2010")
+
+# b)  Tasa de crecimiento, Máxima, Mínima y promedio.
+
+growth<-p%>%
+  group_by(país)%>%
+  mutate(log=log(PIB), g=log-lag(log,1))
+
+sintesis<-na.omit(growth)%>%
+  summarize(gmedio=mean(g),max=max(g),min=min(g))%>%
+  gather(tasa, g, gmedio,max,min)%>%
+  mutate(g=round(g,4)*100)
+
+ggplot(growth, aes(x=Fecha,y=g,colour=país))+
+geom_line()+
+theme_bw()+
+ylab("Tasa de crecimiento anual (%)")+
+  facet_wrap( ~ país)+
+  geom_hline(yintercept=0)+
+ scale_colour_manual(values=c("deepskyblue4", "red","blue","Yellow", "chartreuse4"))
+
+Mexico<-na.omit(filter(growth,país=="México"))
+
+ggplot(Mexico, aes(x=Fecha,y=g))+
+geom_line(col="gray")+
+theme_bw()+
+ylab("Tasa de crecimiento anual (%)")+
+  geom_hline(yintercept=0)+
+  geom_hline(yintercept=.0168,lwd=1,lty=3,col="blue")+
+  geom_hline(yintercept=0.0814,lwd=.5,lty=1,col="forestgreen")+
+  geom_hline(yintercept=-0.0832,lwd=.5,lty=1,col="red")+
+  geom_vline(xintercept=1980,lwd=1,lty=1,col="orange")
+  
+72/2.41
+72/2.03
+72/1.68
+72/1.08
+
+```
+Unidad 4
+```{r,message = FALSE, warning = FALSE,echo=FALSE}
+library(ggplot2)
+library(scales)
+library(zoo)
+library(tidyverse)
+library(plotly)
+
+tc<- read.csv("tc.csv")
+
+rdate<-as.Date(tc$Fecha,"%d/%m/%Y")
+
+tc.z<-zoo(tc$tc, order.by=rdate)
+
+
+## Periodo de  Vicente Fox
+
+VFQ<-window(tc.z, start=as.Date("2000/11/01"), end=as.Date("2006/11/30"))
+
+plot(VFQ,type="l", lwd=.05,col="dodgerblue",xlab="Año", ylab="Pesos/USD",main="VFQ 2000-2006")
+
+
+## Periodo de Felipe Calderón Hinojosa
+
+FCH<-window(tc.z, start=as.Date("2006/11/01"), end=as.Date("2012/11/30"))
+
+plot(FCH,type="l", lwd=.05,col="blue",xlab="Año", ylab="Pesos/USD",main="Tipo de cambio Peso-USD")
+
+## Periodo de Enrique Peña Nieto. 
+
+EPN<-window(tc.z, start=as.Date("2012/11/01"), end=as.Date("2018/11/30"))
+
+plot(EPN,type="l", lwd=.05,col="darkgreen",xlab="Año", ylab="Pesos/USD",main="EPN 2012-2018")
+
+# VFQ Depreciación= 15.7%    
+(log(10.9983)-log(9.3973))*100
+
+
+
+# FCH Depreciación= 17.0%    
+(log(13.0372)-log(10.9983))*100
+
+
+# EPN  Depreciación = 45.4%
+
+(log(20.4108)-log(12.9617))*100
+
+## Desde Elección de MLO.
+
+MLO<-window(tc.z, start=as.Date("2018/07/01"), end=as.Date("2018/12/04"))
+
+plot(MLO,type="l", lwd=.05,col="darkgreen",xlab="Año", ylab="Pesos/USD",main=" Desde elección MLO  2018")+abline(v=as.Date("2018-10-29"), col="red")+abline(v=as.Date("2018-11-12"), col="orange")
+
+``` 
+
+
+
+

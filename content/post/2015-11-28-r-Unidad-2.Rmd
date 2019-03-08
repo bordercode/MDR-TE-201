@@ -1,0 +1,268 @@
+---
+title: "Unidad 2"
+author: "José Luis Manzanares Rivera"
+date: 2015-07-23T21:13:14-05:00
+categories: ["R"]
+tags: ["Practice", "Homework", "PIB"]
+menu:
+  main:
+    name: Unidad 2
+    weight: 4
+---
+
+
+```{r set-global-options, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(eval = TRUE, 
+                      echo = TRUE, 
+                      cache = FALSE,
+                      include = TRUE,
+                      collapse = FALSE,
+                      dependson = NULL,
+                      engine = "R", # Chunks will always have R code, unless noted
+                      error = FALSE)                     
+
+```
+
+
+```{r silent-packages, echo = FALSE, eval = TRUE, message=FALSE, include = FALSE}
+library(tidyverse)
+```
+
+
+
+
+#### Objetivos de aprendizaje de la sesión 3.
+
+Análizar  principales determinantes de la demanda agregada y la determinación del producto   y gasto de equilibrio.
+
+Conocer los instrumentos de la **politica macroeconómica** y su incidencia en las fluctuaciones de la **demanda**. Así como estudiar el mercado de dinero y su interacción con las principales variables macroeconómicas. 
+
+### Consumo, Inversión, Ahorro, Gasto Gubernamental.
+
+
+Para comprender la influencia que los determinates de la Demanda Agregada  tienen sobre los agregados macroeconómicos,  es importante retomar los **modelos** que se han desarrollado por pioneros en el estudio de Macroeconomía. 
+
+Para [John Mynard Keynes](https://drive.google.com/file/d/18Zq1QvrvsFNSJX6RfU1SeQ1is3CN_whr/view?usp=sharing), en su **TEORIA GENERAL DEL EMPLEO, EL INTERÉS Y EL DINERO**, los shocks de demanda fueron un foco de atención para explicar las FLUCTUACIONES de los agregados macroeconómicos. [Recomendación: Lectura del clásico de JMK ](https://drive.google.com/file/d/1alf04kP06ceLmCJewQwNzK5jtRsGxCtw/view?usp=sharing) 
+
+Para JMK, el papel por ejemplo de la **política fiscal** para incentivar la economía es clave. Así mismo el papel de la **inversión** es central. 
+
+Dada la evidencia empírica disponible hoy, sabemos que las **caracteristicas  institucionales** del mercado laboral  tienen una influencia clave en las fluctuaciones del mercado laboral, la determianción de los salarios y los niveles de producción. 
+
+Adicionalmente la **estructura de la economía**. (Basada en innovación y tecnología o actividades primarias, servicios, etc.) constituye un area de estudio en la que se ha avanzado respecto a la postura  Keynesiana.
+
+La teoría de **JMK**, en este sentido exhibe limitaciones que se han modelado por otros enfoques.
+
+Con un mayor énfasis en los determinates de la oferta otros investigadores han abordado el papel de fluctuaciones en el precio relativo  de insumos importados clave como el **petróleo**. O bien recientemente los efectos de factores climático en las fluctuaciones de la  producción. O bien un escenario de colapso del sistema financiero. (Ver RA)  
+
+En cualquier caso note que enfatizamos la SECUENCIA de impactos que ocurren tras un shock ya sea por el lado de la oferta o bien en la demanda. Este proceso secuencial de impactos constituye la escencia de lo que conocemos como los **Ciclos económicos** 
+
+Esta clase aporta herramientas para identificar el origen de los shocks y el proceso secuencial por el que se generan los cliclos económicos. 
+
+Note que las teorias sobre la demanda,  respaldan la aplicación de políticas economicas para corregir los desequilibrios. 
+
+
+#### Crude Oil January 2019 CLF9 (U.S.: Nymex)
+
+![](/img/oil.jpg)
+Fuente:https://quotes.wsj.com/futures/CRUDE%20OIL%20-%20ELECTRONIC
+
+
+
+
+### Variables que componen la  demanda agregada y su equilibrio con oferta agregada.
+
+![](/img/scn11.jpg)
+
+#### Componentes de DA  para México. 
+
+![](/img/ci.jpg)
+![](/img/xt.jpg)
+![](/img/xt2.jpg)
+
+#### Actividad  1 (revisión  en grupo):
+
+Revisar [SHCP pre-criterios gpe 2019](https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/paquete_economico/precgpe/precgpe_2019.PDF) Leer sección  páginas 19-21.  
+
+Tiempo 10 minutos. 
+
+
+### Demanda Agregada.
+
+En una economía cerrada:
+
+$$Q^d = C+I+G$$ 
+En una Economía abierta:
+
+$$Q^d = C+I+G+NX$$ 
+
+
+
+![](/img/demanda.jpg) 
+
+
+
+**La ecuación (4) nos indica que la demanda agregada es una función positiva del gasto del gobierno G y del consumo futuro $C^F$ y negativa del nivel impositivo T y de la tasa de interés i.**
+
+Note el efecto de efecto de un gasto gubernamental, este tendrá un impacto mas que porporcional que el monto gastado en DA. 
+
+Este efecto se conoce como **efecto multiplicador** dado en este caso por la fracción $1/1-c$ y considerando que la propensión marginal a consumir $c>1$, entonces el efecto de un gasto x $G$ sobre $DA$ es >1.  
+
+#### Curva de demanda agregada.
+![](/img/da.jpg)
+
+Donde
+
+$Q^d$: Demand agregada. 
+
+#### La curva de Oferta Agregada  (OA).
+
+En la teoría Keynesiana la curva OA tiene pendiente positiva. El supuesto centeal es que el salario nominal esta fijo, lo cua es intuitivamente claro en el corto lazo.
+
+$$ w= W/P$$ 
+
+Donde: w: salario real, W: Salario Nominal, P:Nivel de precios.
+
+La secuencia ante un incremento en el nivel de precios implica que el salario real será menor y que las empresas estarán dispuestas a ofrecer mayor nivel de producción.
+
+La postura de los **economistas clásicos** (los teóricos que plantean que la economía se encuentra en pleno, si bien con fricciones inherentes a la movilidad laboral  que permiten desempleo por periodos breves, de transición) es que el salario nominal es flexible y se ajusta instantáneamente en respuesta a un incremento en nivel de precios.
+
+$$W=Pw$$
+La implicación de esta hipótesis  sobre **salario flexible** es que el nivel de producción no varia con incrementos del nivel de precios, ya que el salario se ajusta a la alza y no necesariemanee las empresas expanden sus contrataciones. 
+
+El comportamiento del **Mercado Laboral** es la clave del contraste entre la hipótesis de los **clásicos** y la **teoría keynesiana** El resultado de este contraste es la forma de la curva de OA. Para Keynes tiene pendiente  positiva, el salario nominal es **rígido**  para los clásicos el salario nominal es flexible y la curva de OA es vertical, 
+
+El papel de los **contratos colectivos** puede ser una explicación que favorece la hipótesis Keynesiana, ya que los salarios nominales estan sujetos a condiciones contractuales generalmente de largo plazo.  
+
+
+La evidencia empírica indica que no son los extremos de estas hipótesis lo que prevalece, el grado de rigidez en los salarios depende del tipo de instituciones en cada país. 
+
+Un Ejemplo de un escenario en la hipótesis clásica es cuando los salarios estan indexados a la inflación. Ante incrementos en el nivel de precios, el salario real nominal se incrementa y el salario real permanece constante. (OA vertical).
+
+**El equilibrio entre OA y DA, nos permite la determinación del nivel de precios y la produción (de forma implícita del nivel de empleo).**
+
+Es importante puntualizar que el equilibrio es un escanrio descriptivo, no indica que la utilización de los recursos se ubique en su nivel potencial.
+
+#### Equilibrio ante expansión en Demanda agregada. Caso clásico y Keynesiano.
+![](/img/daexp.jpg)
+
+Una expansión en el caso Keynesaino incrementa el nivel de produción y el empleo. No ocurre así bajo la hipótesis clásica.
+
+Nuevamente note que la economías al rededor del mundo exhiben escenarios intermedios dependiendo de la estructura del mercado laboral y el nivel de flexibilización. 
+
+Considerando la teoría presentada podemos concluir  que entre **más flexibe es el salario real**, menores serán los **efectos inflacionarios** de políticas económicas expansivas, sean estas monetaria o fiscales. (Abordaremos este tema con detalle como parte de esta sesión también).
+
+**Conclusión 2**
+
+Las medidas de política económica (Monetaria o fiscal)  tienen el potencial para reactivar el nivel de producción en la medida en que la hipótesis Keynesiana se cumple. 
+
+Un segundo escenario de estática comparativa (como nos referimos a los desplazamientos de interaccion entre oferta y demanda agregadas), es el caso de shocks de oferta. Un ejemplo es el efecto de la innovación y el avance tecnológico, Veamos el resultado sobre el nivel de precios, la producción y el empleo.
+
+#### Equilibrio con expansión de oferta: Caso clásico y Keynesiano.
+
+![](/img/oaexp.jpg)
+El resultado de este **shock de oferta** es, en ambos casos un incremento en el nivel de  produción acompañado de una reducción del nivel general de precios. 
+
+**Note** el efecto con una expansión también de la demanda agregada, lo que se traduce en un efecto de mayor magnitud sobre los agregados económicos, producción y precios.
+
+En conclusión,  la explicación que las escuelas del pensamiento económico presentan permiten identificar la secuencia de impactos que definen los ciclos económicos.
+
+Por una parte los **clásicos**, ya sean **monetaristas** con **Milton Friedman** como exponente emblématico o bien los teóricos de la escuela de **expectativas racionales** Con **Robert Barro y Robert Lucas** perciben una curva de oferta agregada vertical, con una influencia principal de los shocks de DEMANDA inducidos por la **política monetaria**.
+
+Mientras los Keynesianos, pereciben una cruva de **OFERTA AGREGADA** con pendiente positiva y con una relevancia de la **demanda** como origen de los shocks, con lo cual el papel de la **Política fiscal** se considera central.
+
+Una consideración importante sobre la dimensión temporal en  el corto  y el largo plazo es que la teoría Keynesiana admite que en el largo plazo los salarios nominales pueden ajustarse gradualmente.
+
+En este sentido el resultado de las fluctuaciones de la demanda agregada  en el largo plazo tienen impacto sobre el nivel lde precios y no sobre la producción, tal como la hipótesis clásica sugiere. 
+
+
+### Síntesis de hipótesis sobre la curva de oferta agregada.
+
+![](/img/hdacurva.jpg)
+
+
+
+
+
+#### Relación entre los componentes principales de la DA.  La identidad entre ahorro e Inversión y la Cuenta corriente
+
+**Producto Marginal del capital, costo del capital y nivel del capital.**
+
+
+![](/img/s-i4.jpg)
+La inversión es una función inversa de la tasa de interés
+
+\begin{equation}
+ I = f (r)
+\end{equation}
+
+
+¿Qué determina la tasa de interés? El equilibrio entre ahorro (S) e Inversión (I).
+
+Por definición en una economía cerrada, el producto total se puede destinar a consumo o bien a Inveresión. 
+
+$$Q=C+S$$
+o bien 
+
+$$S=Q-C=I$$
+
+En una economía cerrada **I=S** Note que el ahorro es una función positiva de la tasas de interés.  
+
+$$S=S(r)$$
+
+**Equilibrio Ahorro Inversión.**
+![](/img/s-i3.jpg)
+
+En una economía cerrada, la tasa de interés equilibra el ahorro y la inversión.
+
+En una economia abierta la tasa de interés de determina en el mercado mundial.Si es muy alta, el ahorro interno superará a la inversión interna y la economía será **exportadora neta de bienes**. Si es baja el ahorro interno no alcanzará para toda la inversión interna y la economía será importadora neta de bienes.
+
+**Equilibrio Ahorro Inversión economía abierta**
+![](/img/s-i.jpg)
+
+Se define el saldo de la cuenta corriente (CC) como el exceso de ahorro sobre la inversión interna.
+
+
+
+
+\begin{equation}
+CC=S-I
+\end{equation}
+
+La situación de México en CC.
+
+![](/img/marco_macro18-19.jpg)
+![](/img/marco2_macro18-19.jpg)
+Fuente: SHCP. pre-criterios de política económica 2019.
+
+#### Actividad 2  
+
+Realice  control de lectura sobre las causas y consecuencias del deficit comercial. (Entrega  Miercoles 28)
+
+[Trade deficits: Causes and Consequences](https://drive.google.com/file/d/1zVqoCHxYznhCFQa_o68Yyi3qQHVqzaVL/view?usp=sharing)
+
+
+#### Actividad 3 Debate en clase.
+
+Tiempo estimado 25 minutos.
+
+1.-Lectura en clase sobre el caso de la situación del sistema Bancario en Mexico previo al periodo actual.
+
+
+[Mexican Banks](https://drive.google.com/file/d/1lgxI8A6pe_kaqqRVqBDkm3CkGnXGuAQh/view?usp=sharing)  Conducción de politica económica e Impactos sobre agregados Macroeconómicos. 
+
+
+2.-Análice la relación entre las decisiones de política económica y los  impactos sobre el entorno macroeconómico. 
+
+3.-Muestre las relaciones entre variables, los impactos y las causas de las fluctuaciones sobre las variables macroeconómicas. 
+
+[Regulación en Bancos e impactos en agregados Macro ](http://www.elfinanciero.com.mx/nacional/estos-son-los-cobros-que-morena-ya-no-quiere-que-le-pagues-a-los-bancos)
+
+[Regulación en Bancos impactos no considerados](http://www.elfinanciero.com.mx/economia/ven-perdidas-de-17-mil-mdp-al-fisco-por-comisiones)
+
+[Inversión Extranjera](https://www.eleconomista.com.mx/mercados/Flujos-foraneos-salen-del-mercado-mexicano-20181114-0109.html)
+
+[Recuento de costos](http://www.elfinanciero.com.mx/opinion/pablo-hiriart/el-costo-de-la-ineptitud-830-000-000-000-00)
+
+[Presiones al tipo de cambio](https://www.eleconomista.com.mx/economia/Presion-cambiaria-ante-preocupacion-por-politicas-de-AMLO-foco-de-riesgo-para-inflacion-y-PIB-Banxico-20181115-0089.html)
+
+[Impacto de incremento en tasas de interés y DEUDA](https://www.eleconomista.com.mx/economia/Gobierno-de-AMLO-enfrentaria-mayor-costo-de-deuda-por-alza-de-tasas-20181114-0132.html)

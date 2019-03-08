@@ -1,0 +1,470 @@
+---
+title: "Productividad y Crecimiento del ingreso"
+author: "José Luis Manzanares Rivera"
+date: 2015-07-23T21:13:14-05:00
+categories: ["R"]
+tags: ["Practice", "Homework", "PIB"]
+menu:
+  main:
+    name: Unidad 3
+    weight: 7
+---
+
+```{r set-global-options, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(eval = TRUE, 
+                      echo = FALSE, 
+                      cache = FALSE,
+                      include = TRUE,
+                      collapse = FALSE,
+                      dependson = NULL,
+                      engine = "R", # Chunks will always have R code, unless noted
+                      error = FALSE)                     
+
+```
+
+
+```{r silent-packages, echo = FALSE, eval = TRUE, message=FALSE, include = FALSE}
+library(tidyverse)
+library(gganimate)
+library(gapminder)
+library(scales)
+theme_set(theme_light())
+
+knitr::opts_chunk$set(fig.width=12, fig.height=8)
+```
+
+
+
+
+**Objetivo de la sesión**: Analizar los principales determinantes de la Oferta Agregada. 
+
+Cuando nos referimos a crecimiento en la economía es conveniente considerar las variaciones en el largo plazo del PIB, en especial del PIB per cápita. 
+
+En términos teóricos la calidad de vida está asociada con el crecimento del PIB per cápita. Un incremento en el PIB per cápita puede presentarse si el ritmo de crecimiento del PIB es mayor al crecimiento de la poblacion.  
+
+
+Dato: Proyecciones de crecimiento poblacional a 2050. 8,900 millones.
+Apropósito de... 
+
+Digresiones  sobre Malthus, Darwin y escenarios de cambio climático.
+
+```{r, echo=FALSE,eval=FALSE}
+library(gapminder)
+library(ggplot2)
+library(gganimate)
+
+p <- ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  theme(legend.position = 'none') +
+  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  transition_time(year) +
+  ease_aes('linear')
+p
+```
+
+![](/img/continents.gif)
+![](/img/p.gif)
+
+
+#### Actividad 1
+
+A partir de la siguiente información histórica del [PIB](https://drive.google.com/file/d/1aOunSINCM7B2rmrRr0e9dEH96_h3ATTw/view?usp=sharing) percápita:
+
+
+a) Represente la evolución  para México, Chile, Argentina y Brazil en el perido 1960-2017.
+
+b) Estime la tasa de crecimiento anualizado del PIB percápita para México, Brazil, Chile, Argentina. Muestre sus resultados graficamente.  
+
+c) Estime la tasa de crecimiento promedio, mínimo y máximo en los 4 países durante el periodo 1960-2017.
+
+Fuente de Datos: Banco Mundial, cifras expresadas en términos reales US$ año base 2010. 
+
+
+Comente sus resultados. 
+
+1.-¿Qué país ha tenido el mejor desempeñoo del PIB percápita promedio?
+
+2.-¿Cuál ha sido el de menor crecimiento?
+
+
+3.-¿Qué podemos concluir sobre el crecimiento económico de estos países en la región  AL en los últimos 57 años?  Incluya ahora el caso de China y contraste con el desempeño de la región. 
+
+4.- Considerando el desempeño promedio del PIB en los 4 países de AL ¿cuánto tiempo tardarían en duplicar su nivel percápita de ingreso? Tip. Aplique la regla de interes compuesto.  $(1*i^n -1)=R$
+
+Tiempo asignado: 40 minutos.
+
+En términos históricos una clasificación del crecimiento usual distingue  4 etapas:
+
+- Agrarismo               $500-1500$
+- Agrarismo avanzado      $1500-1700$
+- Capitalismo Mercantíl   $1700-1820$
+- Capitalismo.            $1820-1980$
+
+Es durante la última fase que se tiene una trayectoria ascendente sostenida de crecimiento en el PIB. 
+
+
+Para la región de América Latina es conveniente precisar fases concretas en este proceso:  
+
+
+- Exportación de materias primas 1870-1927
+
+- Desarrollo liderado por el Estado.  (Sustitución de importaciones)  1929-1980. Con sub periodos como (Gran depresión y GMII, ejemplos clásicos de la fase de industrialización)
+
+- La década perdida de 1980
+
+- Fase de liberalización económica  1984-2010 y reformas estructurales ----2018.
+
+Hipótesis sobre determinantes del crecimiento: 
+
+- Religión
+
+- Tecnologia y Propiedad Privada.
+
+- Geografía. 
+
+Patrones comunes en la estructura de la economía mundial. 
+
+
+- Declive en la Agricultura.
+
+- Auge  industrial
+
+-  Urbanización
+
+- División del trabajo y especialización
+
+- Ciencia y Tecnología
+
+
+#### Formalización del estudio del crecimiento. El Modelo de Robert Solow. 
+
+El planteamiento contable de Solow parte de los componentes de la función de producción. 
+
+$$ Q=Tf(K,L)$$
+$$ak47-x^2$$
+
+
+
+**Donde:**
+
+**Q**: Nivel de producción
+
+**T**: Estado de la Tecnología
+
+**K**: Acervo de capital
+
+**L**: Insumo Laboral
+
+Solow platea que el crecimiento se puede explicar como la suma de las variaciones en estos tres factores. Note la ponderación que los  factores (Acervo de capital K e Insumo Laboral) tienen. 
+
+![](/img/eqs1.jpg)
+
+
+Note la importancia del progreso tecnológico así como del crecimiento del acervo de capital por trabajador.
+
+Fundamental  inversión en Investigación y desarrollo, (ciencia y tecnología), innovación (patentes) para $$\Delta T/T $$
+
+Mientras el crecimiento del acervo de capital por trabajador, asociado al ahorro privado que se canaliza a inversión en capital. 
+
+Es importante puntualizar que el estudio de crecimiento económico ha incorporado (desde los tiempos de SOLOW) una serie de precisiones que básicamente detallan las fuentes de crecimiento indicadas por Solow. 
+
+Precisiones sobre el factor trabajo para mejorar la calidad de los datos por ejemplo con subcategorias como  **edad, educación y género**.
+
+**En perspectiva:** Revisar el siguiente [Blog](https://www.stlouisfed.org/on-the-economy/2018/march/how-south-korea-economy-develop-quickly)
+
+
+En síntesis las causas que impulsan las variables de crecimiento expuestas por el modelo contable de SOLOW son deiversas e incluyen el marco institucional:  disciplina para mantener finanzas públicas estables,incentivos para la atracción de la inversión privada (como t.c estable), estructura educativa con incentivos para la formación de cuadros calificados.
+
+### Representación gráfica del Modelo Solow
+
+
+Producto per cápita una función positiva del capital per cápita. 
+
+\begin{equation}
+q=f(k)_{+}
+\end{equation}
+
+#### Función de producción en términos per cápita
+
+![](/img/s1.jpg)
+
+Note la forma decreciente que denota una productividad marginal decreciente.  
+
+##### Variación en el acervo de capital (relación capital trabajo) resultado de la tasa de ahorro en la economía
+
+\begin{equation}
+\Delta k=sq-(n+\delta)k
+\end{equation}
+
+Donde: 
+
+**sq**: Fracción de producto destinada al ahorro. 
+
+$\delta k$:Inversión destinada a cubrir la depreciación del capital.
+
+$nk$: Inversión destinada a cubir el capital necesario para proveer a la fuerza laboral a corde con la tasa de crecimiento demográfico **n**. 
+
+
+
+La variación en el acervo de capital por trabajador es igual a la **inversión**  una vez que se descuenta la depreciación y los recursos destinados al capital por trabajador necesario para atender el ritmo de  crecimiento demográfico.
+
+**Note** que la razón capital trabajo **k** depende del ahorro.Recuerde la identidad entre ahorro e Inversión. 
+
+La inversión destinada a $(n+\delta)k$  es suficiente para mantener el acervo de capital constante.
+
+\begin{equation}
+\Delta sq=(n+\delta)k
+\end{equation}
+
+En el largo plazo este escenario de equilirbio  representa un: 
+
+#### Estado estacionario
+
+![](/img/s3.jpg)
+
+#### Desarrollo económico hipotético de un pais a través del tiempo.
+
+![](/img/s5.jpg)
+
+El modelo de Solow describe un proceso de crecimiento dinámico estable. Lo anterior en analogía con  la terminología de los sistemas dinámicos en donde las variables tienden por naturaleza hacia un estado de equilibrio estacionario.
+
+#### Diferentes tasas de Ahorro entre países y la relación capital trabajo.
+
+![](/img/s7.jpg)
+
+#### Aumento en la tasa de ahorro.
+
+![](/img/s6.jpg)
+
+#### Variaciones en la tasas de crecimiento demográfico
+![](/img/s8.jpg)
+
+### Actividad 2
+
+1.- En Equipo presente un exposición sobre uno de los siguientes temas. 
+
+2.- Generación de patentes en México.
+
+3.- Big data y su impacto en productividad.
+
+4.- Fuga de cerebros en AL. 
+
+5.- Remuneraciones en los campos del conocimiento (en AL) y tendencias sobre el mercado laboral. 
+
+
+Tiempo estimado 45 minutos. 
+
+
+**Tarea** Lectura capítulo 4 libro de texto Jefrey Sachs.
+
+
+
+### Mercado de Trabajo, desempleo e inflación.
+
+
+Tal como señalamos en al sesión previa, el funcionamiento del mercado laboral resulta crucial para comprener por ejemplo el impacto de las politicas económicas sobre los principales agregados macroeconomicos, ej. **Niveles de producción y empleo.** 
+
+En la **perspectiva Keynesiana** la rigidez en los salarios nominales no solo sugiere el potencial de las politicas que modifican la demanda agregada (EJ. Política Fiscal), Si no que también implican la existencia de desempleo involuntario.
+
+Para los **teoría clásica** el desempleo tiene que ver con la existencia de regulaciones que "impiden" que el mercado laboral se ajuste.  
+
+
+Piense en el caso del funcionamiento de contratos colectivos de trabajo indexados a la inflación. Por ejemplo de los trabajadores del sector gubernamental. Ej. CPI CONACYT. 
+
+O bien la presencia de leyes de salario Minimo. 
+
+Otro ejemplo es el papel de sindicatos que logran gestionar contratos colectivos.  Escenarios que de otro modo estarian operando bajo los mecanismos de mercado mediante ajustes de oferta y demanda.
+
+
+Considerando el funcionamiento del  mercado de trabajo estadounidense, algunos estudios recientes han tratado de mostrar si existe una relación entre las tasas de desempleo y la  participación en programas públicos que proporcionan ingreso suplementario para desemepleados, si bien este rasgo empírico no ofrece evidencia que confirme  esta relación para la población de origen Méxicana en equel país. 
+
+### Actividad 3
+
+Análisis  y discusión grupal de contenido de coyuntura para México. 
+[Salario Mínimo en México](https://drive.google.com/file/d/1QM6RLz1h12JdTiQJOMGW56ZgYYxglfI7/view?usp=sharing)
+
+Tiempo asignado: 20  minutos.  
+
+Lectura sugerida [Un análisis de los salarios y prestaciones en la maquila desde la perspectiva de Pikketi](http://www.redalyc.org/pdf/654/65456116004.pdf)
+Ver cita de Pikketi (página 37) sobre la importancia del mercado laboral.
+
+Lectura sugerida.
+[Pikketi](https://drive.google.com/file/d/1jVRaikxeqP5t_Hi6U81VRRmPVEX59BaK/view?usp=sharing)  Capítulo 9  *Inequility of labor income.* 
+
+En la práctica se observan grandes disparidades en los niveles salariales que preciben los distintos segmentos de trabajadores este factor constituye un elemento que contribuye  a los desequilibrios del mercado laboral.
+
+```{r}
+
+recent_grads<-read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-16/recent-grads.csv")
+
+major_processed<-recent_grads%>%
+  arrange(desc(Median))%>%
+  mutate(Major=str_to_title(Major), Major=fct_reorder(Major,Median))
+
+```
+
+
+```{r by_major_category}
+
+#Uno de los pasos iniciales de data cleaning que permite agregar por categorias.
+
+by_major_category<-major_processed%>%
+  filter(!is.na(Total))%>%
+  group_by(Major_category)%>%
+  summarize(Men=sum(Men),Women=sum(Women),Total=sum(Total),MedianSalary=sum(Median*Sample_size)/sum(Sample_size))%>%
+  mutate(ShareWomen=Women/Total)%>%
+  arrange(desc(ShareWomen))
+```
+
+##### ¿Cuáles son las areas del conocimiento más populares y la participación por género?
+
+```{r}
+by_major_category%>%
+  mutate(Major_category=fct_reorder(Major_category,Total))%>%
+  gather(Gender, Number, Men, Women)%>%
+  ggplot(aes(Major_category,Number, fill=Gender))+
+  geom_col()+
+  coord_flip()+
+  scale_y_continuous(labels=comma)+
+  labs(x="",y="# Total de graduados")
+  
+
+```
+
+
+#### Salarios promedio por área de conocimiento. 
+
+```{r}
+major_processed%>%
+mutate(Major_category=fct_reorder(Major_category,Median))%>%
+ggplot(aes(Major_category,Median))+
+  geom_boxplot()+
+  coord_flip()+
+  scale_y_continuous(labels=dollar_format())+
+  labs(x="", y="Salario medio anual USD 2015")+
+  expand_limits(y=0)+
+theme(legend.position = "none")
+
+```
+
+
+
+Fuente: Elaboración propia con datos de  http://www.census.gov/programs-surveys/acs/data/pums.html
+
+
+##### ¿Cuáles son las carreras que ofrecen los mayores salarios?
+
+```{r,message = FALSE, warning = FALSE}
+major_processed%>%
+  filter(Sample_size>=100)%>%
+  head(20)%>%
+  ggplot(aes(Major, Median, color=Major_category))+
+  geom_point()+
+  geom_errorbar(aes(ymin=P25th,ymax=P75th))+
+  expand_limits(y=0)+
+  coord_flip()+
+  scale_y_continuous(labels=dollar_format())+
+  labs(title  = "¿Qué Carreras pagan mayor salario?", subtitle ="Top 20 con por lo menos 100 encuestados. Barras representan del percentil p25 al p75", y= "Salario medio de graduados",x="") 
+```
+
+
+#### Variación Salarial.
+
+```{r,message = FALSE, warning = FALSE}
+major_processed%>%
+  filter(Sample_size>=100)%>%
+  mutate(IQR=P75th-P25th,Major=fct_reorder(Major,IQR))%>%
+  arrange(desc(IQR))%>%
+  head(10)%>%
+  ggplot(aes(Major,IQR, fill=Major_category))+
+  geom_col()+
+  coord_flip()+
+  scale_fill_brewer(palette="Spectral")+
+  labs(x="", y="IQR")+
+  expand_limits(y=0)+
+  scale_y_continuous(labels=dollar_format())+
+  labs(title  = "Carreras que tienen alta variacón en el rango salarial?", subtitle ="Top 10 con por lo menos 100 encuestados.", y= "Variación (IQR) en USD2015 ",x="") 
+
+```
+
+
+#### Carreras con mayores tasas de desempleo.
+
+
+```{r,message = FALSE, warning = FALSE}
+major_processed%>%
+arrange(desc(Unemployment_rate))%>%
+  head(10)%>%
+  mutate(Major=fct_reorder(Major,Unemployment_rate))%>%
+ggplot(aes(Major,Unemployment_rate, fill=Major_category))+
+  geom_col()+
+  coord_flip()+
+  scale_fill_brewer(palette="Spectral")+
+  scale_y_continuous(labels=percent_format())+
+  labs(x="", y="Tasa de desempleo  (%)", title="¿Qué carreras tienen mayores  tasas de desempleo?")+
+  expand_limits(y=0)
+```
+
+
+
+##### Correlación entre Salario medio y participación de la Mujer en empleo,  disciplinas más populares.
+
+```{r,message = FALSE, warning = FALSE, fig.width=10, fig.height=6}
+library(ggrepel)
+library(plotly)
+
+g<-major_processed%>%
+ filter(Major_category=="Engineering"|Major_category=="Business"|Major_category=="Agriculture & Natural Resources"|Major_category=="Health")%>%
+  rename(Area=Major_category)%>%
+  ggplot(aes(ShareWomen,Median, color=Area,size=Sample_size, label=Major))+
+  geom_point()+
+  geom_smooth(aes(group=1),method = "lm")+
+  expand_limits(y=0)+
+  scale_color_brewer(palette="Dark2")+
+  scale_y_continuous(labels=dollar_format())+
+  scale_x_continuous(labels=percent_format())+
+  labs(x="Mujeres/Hombres", y="Salario Medio  US$")+
+  theme(legend.position="botton")
+
+ggplotly(g)
+```
+
+
+
+
+
+En el escenario regional fronterizo por ejemplo consideremos la: 
+
+#### Trayectoria de las remuneraciones en la industria maquiladora según posición en el trabajo, 1978-1999, para dos ciudades fronterizas con importante presencia de este sector.
+
+![](/img/FIG_1.jpg)
+Fuente: Elaboración propia INEGI, Estadística de la Industria Maquiladora de Exportación. 1978-1988, INEGI, 1989-1999. Encuesta mensual de la industria manufacturera (EMIM)
+
+Note una pérdida de **poder adquisitivo** del 47% para la categoría **Obreros** en Juárez y de 32% para Matamoros.
+
+En contraparte un factor que en términos empíricos  estabiliza las fluctuaciones en el mercado laboral es la **Flexibilización** de las condiciones contractuales. (ej. Esquema de investigadores cátedras CPI's).
+
+Nuevamente considermos el ejemplo de los trabajadores en dos ciudes fronterizas 
+
+#### Evolución del personal subcontratado en la maquiladora de Ciudad Juárez y Matamoros, 2008-2014.(variación porcentual)
+
+
+![](/img/FIG_3.jpg)
+Fuente: Elaboración propi INEGI. 2015, Programa IMMEX.
+
+
+
+
+### Actividad 4 Control de Lectura. 
+
+[Pikketi](https://drive.google.com/file/d/1jVRaikxeqP5t_Hi6U81VRRmPVEX59BaK/view?usp=sharing)  Capítulo 6  *The Capital- Labor Split in the Twenty- First Century.* 
+
+Análisis crítico sobre el tema. Formato argumentación reflexiva,  Extensión mínima 1000 palabras.
+
+Fecha de entrega viernes 14  Diciembre.
+ 
+ 

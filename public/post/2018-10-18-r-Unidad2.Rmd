@@ -1,0 +1,567 @@
+---
+title: "Unidad 2"
+author: "José Luis Manzanares Rivera"
+date: 2015-07-23T21:13:14-05:00
+categories: ["R"]
+tags: ["Practice", "Homework", "PIB"]
+menu:
+  main:
+    name: Unidad 2
+    weight: 4
+---
+
+
+```{r set-global-options, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(eval = TRUE, 
+                      echo = TRUE, 
+                      cache = FALSE,
+                      include = TRUE,
+                      collapse = FALSE,
+                      dependson = NULL,
+                      engine = "R", # Chunks will always have R code, unless noted
+                      error = FALSE)                     
+
+```
+
+
+```{r silent-packages, echo = FALSE, eval = TRUE, message=FALSE, include = FALSE}
+library(tidyverse)
+```
+
+
+
+
+#### Objetivos de aprendizaje de la sesión 3.
+
+Análizar  principales determinantes de la demanda agregada y la determinación del producto   y gasto de equilibrio.
+
+Conocer los instrumentos de la **politica macroeconómica** y su incidencia en las fluctuaciones de la **demanda**. Así como estudiar el mercado de dinero y su interacción con las principales variables macroeconómicas. 
+
+### Consumo, Inversión, Ahorro, Gasto Gubernamental.
+
+
+Para comprender la influencia que los determinates de la Demanda Agregada  tienen sobre los agregados macroeconómicos,  es importante retomar los **modelos** que se han desarrollado por pioneros en el estudio de Macroeconomía. 
+
+Para [John Mynard Keynes](https://drive.google.com/file/d/18Zq1QvrvsFNSJX6RfU1SeQ1is3CN_whr/view?usp=sharing), en su **TEORIA GENERAL DEL EMPLEO, EL INTERÉS Y EL DINERO**, los shocks de demanda fueron un foco de atención para explicar las FLUCTUACIONES de los agregados macroeconómicos. [Recomendación: Lectura del clásico de JMK ](https://drive.google.com/file/d/1alf04kP06ceLmCJewQwNzK5jtRsGxCtw/view?usp=sharing) 
+
+Para JMK, el papel por ejemplo de la **política fiscal** para incentivar la economía es clave. Así mismo el papel de la **inversión** es central. 
+
+Dada la evidencia empírica disponible hoy, sabemos que las **caracteristicas  institucionales** del mercado laboral  tienen una influencia clave en las fluctuaciones del mercado laboral, la determianción de los salarios y los niveles de producción. 
+
+Adicionalmente la **estructura de la economía**. (Basada en innovación y tecnología o actividades primarias, servicios, etc.) constituye un area de estudio en la que se ha avanzado respecto a la postura  Keynesiana.
+
+La teoría de **JMK**, en este sentido exhibe limitaciones que se han modelado por otros enfoques.
+
+Con un mayor énfasis en los determinates de la oferta otros investigadores han abordado el papel de fluctuaciones en el precio relativo  de insumos importados clave como el **petróleo**. O bien recientemente los efectos de factores climático en las fluctuaciones de la  producción. O bien un escenario de colapso del sistema financiero. (Ver RA)  
+
+En cualquier caso note que enfatizamos la SECUENCIA de impactos que ocurren tras un shock ya sea por el lado de la oferta o bien en la demanda. Este proceso secuencial de impactos constituye la escencia de lo que conocemos como los **Ciclos económicos** 
+
+Esta clase aporta herramientas para identificar el origen de los shocks y el proceso secuencial por el que se generan los cliclos económicos. 
+
+Note que las teorias sobre la demanda,  respaldan la aplicación de políticas economicas para corregir los desequilibrios. 
+
+
+#### Crude Oil January 2019 CLF9 (U.S.: Nymex)
+
+![](/img/oil.jpg)
+Fuente:https://quotes.wsj.com/futures/CRUDE%20OIL%20-%20ELECTRONIC
+
+
+
+
+### Variables que componen la  demanda agregada y su equilibrio con oferta agregada.
+
+![](/img/scn11.jpg)
+
+#### Componentes de DA  para México. 
+
+![](/img/ci.jpg)
+![](/img/xt.jpg)
+![](/img/xt2.jpg)
+
+#### Actividad  1 (revisión  en grupo):
+
+Revisar [SHCP pre-criterios gpe 2019](https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/paquete_economico/precgpe/precgpe_2019.PDF) Leer sección  páginas 19-21.  
+
+Tiempo 10 minutos. 
+
+
+### Demanda Agregada.
+
+En una economía cerrada:
+
+$$Q^d = C+I+G$$ 
+En una Economía abierta:
+
+$$Q^d = C+I+G+NX$$ 
+
+
+
+![](/img/demanda.jpg) 
+
+
+
+**La ecuación (4) nos indica que la demanda agregada es una función positiva del gasto del gobierno G y del consumo futuro $C^F$ y negativa del nivel impositivo T y de la tasa de interés i.**
+
+Note el efecto de efecto de un gasto gubernamental, este tendrá un impacto mas que porporcional que el monto gastado en DA. 
+
+Este efecto se conoce como **efecto multiplicador** dado en este caso por la fracción $1/1-c$ y considerando que la propensión marginal a consumir $c>1$, entonces el efecto de un gasto x $G$ sobre $DA$ es >1.  
+
+#### Curva de demanda agregada.
+![](/img/da.jpg)
+
+Donde
+
+$Q^d$: Demand agregada. 
+
+#### La curva de Oferta Agregada  (OA).
+
+En la teoría Keynesiana la curva OA tiene pendiente positiva. El supuesto centeal es que el salario nominal esta fijo, lo cua es intuitivamente claro en el corto lazo.
+
+$$ w= W/P$$ 
+
+Donde: w: salario real, W: Salario Nominal, P:Nivel de precios.
+
+La secuencia ante un incremento en el nivel de precios implica que el salario real será menor y que las empresas estarán dispuestas a ofrecer mayor nivel de producción.
+
+La postura de los **economistas clásicos** (los teóricos que plantean que la economía se encuentra en pleno, si bien con fricciones inherentes a la movilidad laboral  que permiten desempleo por periodos breves, de transición) es que el salario nominal es flexible y se ajusta instantáneamente en respuesta a un incremento en nivel de precios.
+
+$$W=Pw$$
+La implicación de esta hipótesis  sobre **salario flexible** es que el nivel de producción no varia con incrementos del nivel de precios, ya que el salario se ajusta a la alza y no necesariemanee las empresas expanden sus contrataciones. 
+
+El comportamiento del **Mercado Laboral** es la clave del contraste entre la hipótesis de los **clásicos** y la **teoría keynesiana** El resultado de este contraste es la forma de la curva de OA. Para Keynes tiene pendiente  positiva, el salario nominal es **rígido**  para los clásicos el salario nominal es flexible y la curva de OA es vertical, 
+
+El papel de los **contratos colectivos** puede ser una explicación que favorece la hipótesis Keynesiana, ya que los salarios nominales estan sujetos a condiciones contractuales generalmente de largo plazo.  
+
+
+La evidencia empírica indica que no son los extremos de estas hipótesis lo que prevalece, el grado de rigidez en los salarios depende del tipo de instituciones en cada país. 
+
+Un Ejemplo de un escenario en la hipótesis clásica es cuando los salarios estan indexados a la inflación. Ante incrementos en el nivel de precios, el salario real nominal se incrementa y el salario real permanece constante. (OA vertical).
+
+**El equilibrio entre OA y DA, nos permite la determinación del nivel de precios y la produción (de forma implícita del nivel de empleo).**
+
+Es importante puntualizar que el equilibrio es un escanrio descriptivo, no indica que la utilización de los recursos se ubique en su nivel potencial.
+
+#### Equilibrio ante expansión en Demanda agregada. Caso clásico y Keynesiano.
+![](/img/daexp.jpg)
+
+Una expansión en el caso Keynesaino incrementa el nivel de produción y el empleo. No ocurre así bajo la hipótesis clásica.
+
+Nuevamente note que la economías al rededor del mundo exhiben escenarios intermedios dependiendo de la estructura del mercado laboral y el nivel de flexibilización. 
+
+Considerando la teoría presentada podemos concluir  que entre **más flexibe es el salario real**, menores serán los **efectos inflacionarios** de políticas económicas expansivas, sean estas monetaria o fiscales. (Abordaremos este tema con detalle como parte de esta sesión también).
+
+**Conclusión 2**
+
+Las medidas de política económica (Monetaria o fiscal)  tienen el potencial para reactivar el nivel de producción en la medida en que la hipótesis Keynesiana se cumple. 
+
+Un segundo escenario de estática comparativa (como nos referimos a los desplazamientos de interaccion entre oferta y demanda agregadas), es el caso de shocks de oferta. Un ejemplo es el efecto de la innovación y el avance tecnológico, Veamos el resultado sobre el nivel de precios, la producción y el empleo.
+
+#### Equilibrio con expansión de oferta: Caso clásico y Keynesiano.
+
+![](/img/oaexp.jpg)
+El resultado de este **shock de oferta** es, en ambos casos un incremento en el nivel de  produción acompañado de una reducción del nivel general de precios. 
+
+**Note** el efecto con una expansión también de la demanda agregada, lo que se traduce en un efecto de mayor magnitud sobre los agregados económicos, producción y precios.
+
+En conclusión,  la explicación que las escuelas del pensamiento económico presentan permiten identificar la secuencia de impactos que definen los ciclos económicos.
+
+Por una parte los **clásicos**, ya sean **monetaristas** con **Milton Friedman** como exponente emblématico o bien los teóricos de la escuela de **expectativas racionales** Con **Robert Barro y Robert Lucas** perciben una curva de oferta agregada vertical, con una influencia principal de los shocks de DEMANDA inducidos por la **política monetaria**.
+
+Mientras los Keynesianos, pereciben una cruva de **OFERTA AGREGADA** con pendiente positiva y con una relevancia de la **demanda** como origen de los shocks, con lo cual el papel de la **Política fiscal** se considera central.
+
+Una consideración importante sobre la dimensión temporal en  el corto  y el largo plazo es que la teoría Keynesiana admite que en el largo plazo los salarios nominales pueden ajustarse gradualmente.
+
+En este sentido el resultado de las fluctuaciones de la demanda agregada  en el largo plazo tienen impacto sobre el nivel lde precios y no sobre la producción, tal como la hipótesis clásica sugiere. 
+
+
+### Síntesis de hipótesis sobre la curva de oferta agregada.
+
+![](/img/hdacurva.jpg)
+
+
+
+
+
+#### Relación entre los componentes principales de la DA.  La identidad entre ahorro e Inversión y la Cuenta corriente
+
+**Producto Marginal del capital, costo del capital y nivel del capital.**
+
+
+![](/img/s-i4.jpg)
+La inversión es una función inversa de la tasa de interés
+
+\begin{equation}
+ I = f (r)
+\end{equation}
+
+
+¿Qué determina la tasa de interés? El equilibrio entre ahorro (S) e Inversión (I).
+
+Por definición en una economía cerrada, el producto total se puede destinar a consumo o bien a Inveresión. 
+
+$$Q=C+S$$
+o bien 
+
+$$S=Q-C=I$$
+
+En una economía cerrada **I=S** Note que el ahorro es una función positiva de la tasas de interés.  
+
+$$S=S(r)$$
+
+**Equilibrio Ahorro Inversión.**
+![](/img/s-i3.jpg)
+
+En una economía cerrada, la tasa de interés equilibra el ahorro y la inversión.
+
+En una economia abierta la tasa de interés de determina en el mercado mundial.Si es muy alta, el ahorro interno superará a la inversión interna y la economía será **exportadora neta de bienes**. Si es baja el ahorro interno no alcanzará para toda la inversión interna y la economía será importadora neta de bienes.
+
+**Equilibrio Ahorro Inversión economía abierta**
+![](/img/s-i.jpg)
+
+Se define el saldo de la cuenta corriente (CC) como el exceso de ahorro sobre la inversión interna.
+
+
+
+
+\begin{equation}
+CC=S-I
+\end{equation}
+
+La situación de México en CC.
+
+![](/img/marco_macro18-19.jpg)
+![](/img/marco2_macro18-19.jpg)
+Fuente: SHCP. pre-criterios de política económica 2019.
+
+#### Actividad 2  
+
+Realice  control de lectura sobre las causas y consecuencias del deficit comercial. (Entrega  Miercoles 28)
+
+[Trade deficits: Causes and Consequences](https://drive.google.com/file/d/1zVqoCHxYznhCFQa_o68Yyi3qQHVqzaVL/view?usp=sharing)
+
+
+#### Actividad 3 Debate en clase.
+
+Tiempo estimado 25 minutos.
+
+1.-Lectura en clase sobre el caso de la situación del sistema Bancario en Mexico previo al periodo actual.
+
+
+[Mexican Banks](https://drive.google.com/file/d/1lgxI8A6pe_kaqqRVqBDkm3CkGnXGuAQh/view?usp=sharing)  Conducción de politica económica e Impactos sobre agregados Macroeconómicos. 
+
+
+2.-Análice la relación entre las decisiones de política económica y los  impactos sobre el entorno macroeconómico. 
+
+3.-Muestre las relaciones entre variables, los impactos y las causas de las fluctuaciones sobre las variables macroeconómicas. 
+
+[Regulación en Bancos e impactos en agregados Macro ](http://www.elfinanciero.com.mx/nacional/estos-son-los-cobros-que-morena-ya-no-quiere-que-le-pagues-a-los-bancos)
+
+[Regulación en Bancos impactos no considerados](http://www.elfinanciero.com.mx/economia/ven-perdidas-de-17-mil-mdp-al-fisco-por-comisiones)
+
+[Inversión Extranjera](https://www.eleconomista.com.mx/mercados/Flujos-foraneos-salen-del-mercado-mexicano-20181114-0109.html)
+
+[Recuento de costos](http://www.elfinanciero.com.mx/opinion/pablo-hiriart/el-costo-de-la-ineptitud-830-000-000-000-00)
+
+[Presiones al tipo de cambio](https://www.eleconomista.com.mx/economia/Presion-cambiaria-ante-preocupacion-por-politicas-de-AMLO-foco-de-riesgo-para-inflacion-y-PIB-Banxico-20181115-0089.html)
+
+[Impacto de incremento en tasas de interés y DEUDA](https://www.eleconomista.com.mx/economia/Gobierno-de-AMLO-enfrentaria-mayor-costo-de-deuda-por-alza-de-tasas-20181114-0132.html)
+
+
+### Mercado de Dinero y banco central.
+
+**Objetivo:** Conocer el proceso para determinar el nivel de precios en la economía mediante el equilibrio entre oferta y demanda por dinero.
+
+#### Propiedades del Dinero:
+
+- **Medio de cambio**
+
+- **Reserva de valor**: Una propiedad que pierde relevancia en periodos de alta inflación.
+
+- **Unidad de cuenta**: Los precios se cotizan en unidades de dinero.
+
+El dinero se clasifica por su grado de liquidez  y se agrupa en agregados monetarios. Mh,M1,M2,M3. Mh se integra por efectivo y reservas monerarias que los bancos mantienen en la reserva federal. Mh es dedenominado tambien **base monetaria** 
+
+Esta clasificación también refleja la relación inversa entre el grado de liquidez y rendimento. Por lo general los instrumentos de menor liquidez como M4 (ej. Bonos del Tesoro), generan un mayor rendimiento.
+
+##### Teoría de demanda del Dinero.
+
+El primer elemento de ésta teoría es la relación que muestra la velocidad a la cual se generan las transacciones monetarias.
+
+![](/img/vel.jpg)
+
+Donde: 
+
+**M** Representa la base monetaria.
+
+**V** Velocidad de las transacciones
+
+**P** Nivel de precios 
+
+**Q** Nivel de producción.
+
+Expresado de otra manera  ésta relación tenemos:
+
+\begin{equation}
+MV=PQ
+\end{equation}
+
+
+Esta relación se denomina ecuación cuantitativa del dinero. Escencialmente indica que la oferta del dinero es proporcional al Producto Interno Bruto con un factor de proporcionalidad de **1/V** 
+
+Si re expresamos la ecuación:
+
+### M/P=Q/V  Demanda desaldos monetarios reales.
+
+Una expresión que representan la demanda de saldos reales (dinero) como función de PIB real.
+
+**Ecuación de la curva Md. Demanda monetaria).**
+
+### P=M V/Q  
+
+#### La oferta Monetaria.
+
+La oferta monetaria (OM) esta determinada por el Banco central.
+Un mecanismo para modificar la OM es mediante las **operaciones de mercado abierto** que realiza el banco central.  El activo sobre el cual se hacen estas operaciones son los bonos del tesoro.
+
+Una **compra** de estos instrumentos por parte del Banco central implica un incremento de la oferta monetaria. Se retiran bonos y se incrementa el circulante.
+
+Una **venta** de estos instrumentos implica retirar circulante  y por lo tanto, una disminución de la oferta monetaria OM)
+
+Como parte del balance tenemos una seria de activos y pasivos. 
+
+Activos representativos en el balance del Banco central: **Bonos del tesoro y reservas**. Pasivos representativos: Oferta monetaria  **Mh**
+
+Desde la perspectiva de la operación del Banco central las variaciones de la oferta monetaria se puede representar entonces como: 
+
+![](/img/mh.jpg)
+
+Donde: 
+
+**Mh** Base Monetaria.
+
+**BT** Bonos del tesoro.
+
+**E** Tipo de cambio.
+
+**R** Reservas internacionales
+
+##### Equilibrio en el mercado Monetario en una economía cerrada.
+
+El supuesto de partida es que la demanda de dinero es proporcional al PIB (el parámetro **V** que mide la velocidad es fijo). La demanda de dinero (Md) es una relación positiva del nivel de precios. 
+
+La oferta de dinero (Ms) está determinada por el Banco central, en términos gráficos es una vertical. 
+
+El equilibrio  **Ms=Md** en el mercado de dinero determina el nivel de precios de la economía.
+
+**Escenario 1:** Una política moneratia expansiva,  por ejemplo mediante la compra de bonos através de operaciones de mercado abierto. 
+
+**Efecto:** Incremento en el nivel genral de precios. (Inflación).
+
+**Nota:** El mecanísmo por el cuál la decisión de política monetaria de expandir la oferta de dinero, se traduce en un proceso inflacionario, se conoce como efecto trapaso. Para mayor referencia sobre este proceso en términos empíricos para la economía Mexicana  [Lea](http://quantitativa.ucol.mx/index.php/Quantitativa/article/view/9)
+
+
+![](/img/OM.jpg)
+**Escenario 2**: Se tiene una transición de la economía hacia un entorno *cashless* mediante la proliferación del uso de medios electrónicos para hacer transacciones monetarias. En términos de las variables del modelo de oferta y demanda de dinero, la vaocidad **V** se incrementa lo que permite realizar el mismo nivel de transacciones con una cantidad menor de dinero.
+
+La reducción en la demanda de dinero se representa con una rotación a la izquierda de la curva Md en el modelo. Recuerde la **pendiente** de la curva de demanda de dinero Md es **V/Q**.
+
+### P=M V/Q 
+
+
+**Note:** Si V y Q permanecen constantes un incremento de M (Política Monetaria expansiva) conduce a un incremento en el nivel general de precios (P).
+
+
+Efecto
+![](/img/OM2.jpg)
+
+Tanto el escenario 1 como 2, (politica monetaria expansiva como reducción en la demanda de dinero), el efecto es un incremento en el nivel genalizado de precios.
+
+Una tercera causa del incremento generalizado del nivel de precios  en este modelo se presenta ante una **reducción de la cantidad de bienes disponibles en la economia**, (caída del PIB), en presencia de un monto dado de dinero en la economía (oferta monetaria constante).
+
+La pendiente de la curva de demnada de dinero es **V/Q**, una disminución de Q, (nivel de producción), rota la curva Md a la izquierda. (Mayor pendiente).
+
+##### Síntesis de impactos sobre nivel de precios asociados al  Mercado de Dinero: (Economía cerrada ej. No comercio internacional)
+
+- Política monetaria expansiva---------------------------- Inflación.
+
+- Cashless-e: Incremento en velocidad de transacciones---- Inflación.
+
+- Caída del PIB -------------------------------------------Inflación.
+
+### Equilibro en mercado Monetario en una economía abierta.
+
+En una economía que tiene vínculos comerciales con el resto del mundo existe una relación entre los niveles de precios locales, foráneos y el tipo de cambio. Este vínculo de precios relativos se puede representar mediente el concepto de la **Paridad del Poder de compra** **PPC.** 
+
+### P=EP*  Ecuación de paridad de poder de compra.
+
+Donde:
+
+**P** Nivel de precios local 
+
+**E** Tipo de cambio (ej. Pesos por USD) Número de unidades de moneda local por unidad de moneda extranjera.
+
+P* Nivel de precios foráneo.
+
+El tipo de cambio depende de la politica monetaria entre los países.
+
+Una política monteraria expansiva en el país A (nuestro país), provoca un incremento en el nivel de precios  incluido un incremento en el tipo de cambio, (depreciación).
+
+Demostración:
+
+![](/img/tc.jpg)
+
+La expresión muestra claramente que el tipo de cambio en nuestro país **E** depende de la oferta monetaria relativa entre  nuestro país y el país foráneo. Así, cuando en nuestro pais se tiene una politica monetaria expansiva, el tipo de cambio se deprecia. 
+
+#### Tipo de cambio Peso-USD
+![](/img/tcmx.jpg)
+Fuente:https://quotes.wsj.com/fx/USDMXN
+
+#### Tipo de cambio Major Currencies
+![](/img/tcworld.jpg)
+Fuente:https://quotes.wsj.com/fx/USDMXN
+
+#### Variación del Tipo de cambio en paises seleccionados*
+![](/img/tc_i.jpg)
+Fuente:Estadisticas Financieras Internacionales.
+
+(Ceteris paribus) Si el país extranjero aplica una poltíca moneratia expansiva,  el tipo de cambio **E** se aprecia. 
+
+¿Qué sucede si ambos países aplican una politica monetaria expansiva? 
+a) Tipo de cambio?
+b) al nivel de precios de cada país? 
+
+#### Inflación
+
+Ya hemos definido este  fenómeno. Dados los elementos del modelo de Mercado de Dinero, sabemos que una causa de la inflación se vincula con las variaciones en la oferta monetaria M (considerando V/Q constante).
+
+Importante distinguir incrementos aislados, (ej. un alza de una sola vez en precios clave como el petróleo) de un uncremento sostenido de largo plazo (ej. como resultado de un persistente déficit presupuestal de magnitud considerable). 
+
+Cuál es el monto del deficit presupuestario en México 2017 (como % del PIB)? 
+
+El fenómeno de Hiperinflación se puede considerar cuando el nivel general de precios presenta incrementos $> 50%$ al mes.
+
+#### Tasas de interés Nominal y real.
+
+![](/img/i.jpg)
+
+#### México 10 Year Government Bond.
+
+![](/img/imx.jpg)
+Fuente: https://quotes.wsj.com/bond/BX/LMBMKMX-10Y
+
+#### Tasa de interés, el entorno mundial hoy (Noviembre 2018)
+![](/img/iworld.jpg) 
+
+Fuente: https://quotes.wsj.com/bond/BX/LMBMKMX-10Y
+
+
+
+#### Tasa de interés Nominales y Reales Bonos de Tesoro EUA 1997-2000. 
+![](/img/tinyr.jpg)
+Fuente: FMI Estadísticas Financieras Internacionales. 
+
+
+
+#### US 10 Year Treasury Bond
+
+![](/img/ius.jpg)
+Fuente: https://quotes.wsj.com/bond/BX/TMUBMUSD10Y
+
+#### Actividad 4
+
+Revise el siguiente clip sobre el caso de la economía Argentina y Comente en Disqus las preguntas que se indican.
+
+[Ciclos Económicos y periodos de crisis en la región AL  ](https://www.youtube.com/watch?v=-k81k352tx4)
+
+
+
+Tiempo estimado 20  minutos.
+
+1.- ¿Qué papel ha tenido la política monetaria extranjera (EUA), para el desempeño de los agregados económicos en algunos paises de la región América Latina?
+
+
+2.-¿Cuál es el escenario del nivel general de precios que se presenta?
+
+
+3.Es posible encontrar puntos de similitud con el caso Méxicano actual? Base su respuesta en los planteamientos teoricos tanto del  mercado de Dinero como de los componetes de oferta y demanda agregadas
+
+
+
+### Política Fiscal y política Monetaria
+
+**Política FIscal:** Decisiones en materia tributaria y de gasto gubernamental. 
+
+
+**Política Monetaria: ** Decisiones sbre la oferta monetaria y tasas de interés.
+
+Ambos conjuntos de decisiones pueden en teoría usarse para estabilizar las condiciones de la  economía.
+
+Esto es, en ambos casos se tienen impactos sobre el nivel de producción (incluido el empleo) y precios, Veamos estos efectos con base en el modelo de Oferta y Demanda agregadas.
+
+
+Para la **hipótesis Keynesiana** la **política fiscal** y **Monetaria** constituyen importantes mecanísmos de estabilización al influir en la **demanda agregada**:
+
+Recordemos que para esta vertiente teórica **el salario nominal es rígido** lo que explica una pendiente de la curva de demanda agregada positiva. 
+
+
+Recordemos también que **la postura clásica**  propone una forma de la **curva de oferta agregada vertical** (**salarios nominales flexibles**) donde  variaciones sobre la demanda agregada **impactan el nivel de precios**  no el nivel de producción.  
+  
+En este sentido los impactos de la políticas fiscal y monetaria difieren acorde con los supuestos sobre la estructura del mercado laboral.
+
+Para analizar estos impactos vamos a utilizar un modelo en el que interactúan las variables de política monetaria y fiscal, este modelo se denomina: **Investment-Savings ,  Liquidity-Money**  o **IS-LM**.
+
+La primera parte que integra el funcionamiento del mercado de bienes y productos y el segundo el mercado de dinero. 
+
+En conjunto es un modelo que explica variaciones de la **DEMANDA AGREGADA** únicamente, no de la oferta agregada.
+
+  
+### Modelo IS-LM (Sir John Hicks)
+
+Es un modelo desarrollado por el premio nobel Sir John [Hicks](https://drive.google.com/file/d/1zYaT0ZCiUpOAbjEaxGM2Tj7CGX7052IM/view?usp=sharing) en la década de los 30´s que permite una representación gráfica de la demanda agregada así como los impactos de las politicas macroeconómicas. 
+
+## Curva Investment Savings  IS.
+
+Relaciona la tasa de interés con la demanda agregada. 
+
+![](/img/is.jpg)
+
+Note que la pendiente negativa se debe al impacto negativo de la tasa de interés sobre los componentes Consumo e Inversión.
+
+Note además que la posición de la curva se establece considerando una **postura fija de las variables que definen la política fiscal (T y G) y del ingreso disponible (Q-T)**. 
+
+En este sentido ajustes de política fiscal se reflejan como desplazamientos en la posición de la curva IS. 
+
+## Curva Liquidity Preference for Money. (Real)
+
+Esta curva se basa en la operación del mercado de dinero mediante la ecuación cuantitativa.
+
+##### MV=PQ
+
+##### M/P= 1/V (Q)
+
+Establece la relación de la tasa de interés y el nivel de demanda agregada ante un nivel dado  de precios y de oferta monetaria (saldos reales $M/P$).
+
+  
+Recordemos que la variable velocidad del dinero guarda una relación positiva con la tasa de interés, (la tasa de interés representa el costo de oportunidad de mantener activos líquidos como el dinero en efectivo). $$V=f(i)_{+}$$
+
+Reexpresando la ecuación cuantitativa para tener la forma lineal de la curva LM, tenemos:
+
+![](/img/lmeq.jpg)
+
+![](/img/lm.jpg)
+
+En conjunto las curvas IS-LM determinan la tasas de interés y la demanda agregada de equilibrio. 
+
+### Equilibrio Modelo IS-LM e impacto de  Politica monetaria restrictiva.
+
+![](/img/islm.jpg)
+
+Note el impacto de una **política monetaria** restrictiva por ejemplo mediante operaciones de mercado abierto para reducir la oferta monetaria (venta de bonos gubernamentales).
+
+Mayor tasa de interés, menor demanda agregada. 
+
+
+**Tarea** Revisar capítulo 7 Texto de Jefrey Sachs.  
+
+Lectura recomendada:  [Hicks](https://drive.google.com/file/d/1zYaT0ZCiUpOAbjEaxGM2Tj7CGX7052IM/view?usp=sharing)
